@@ -1,6 +1,6 @@
 # ¿Qué es un compilador?
 
-Es un programa que traduce un programa en lenguaje fuente a un programa en
+Es un programa que traduce un programa escrito en lenguaje fuente a un programa en
 lenguaje objeto y que tenga una equivalencia.
 
 Un compilador consta de dos partes:
@@ -20,11 +20,14 @@ Un compilador consta de dos partes:
    1. Revisa que los operandos de una operación estén correctos.
    2. Conversión de tipos.
 4. **Generación de Código Intermedio**:
-   1. Es fácil de generar.
-   2. Tipos de código intermedio:
-      1. _3 direcciones_: Máximo de 3 operandos y máximo 2 operadores por línea.
-      2. _Postfijo_.
-      3. _A.A.S._
+   - Equivalente al programa que le dimos como entrada al compilador.
+   - _Equivalente_: que haga lo mismo.
+   - Es fácil de generar.
+   - Tipos de código intermedio:
+     1. _Código de 3 direcciones_:
+        - Máximo de 3 operandos y máximo 2 operadores por línea.
+     2. _Postfijo_.
+     3. _A.A.S._
 5. **Optimización de Código**:
 6. **Generación de Código**:
 
