@@ -28,8 +28,10 @@ Un compilador consta de dos partes:
         - Máximo de 3 operandos y máximo 2 operadores por línea.
      2. _Postfijo_.
      3. _A.A.S._
-5. **Optimización de Código**:
-6. **Generación de Código**:
+5. **Optimización de Código**: Es la optimización del código intermedio para 
+eliminar expresiones redundantes o poco eficientes.
+6. **Generación de Código**: En esta etapa se genera el código final de la 
+compilación.
 
 ## Glosario de Términos.
 
@@ -37,4 +39,3 @@ Un compilador consta de dos partes:
 - **Token**: Se definen por el lenguaje en cuestión.
 - **Cardinalidad**: Es el número de elementos en un conjunto.
 
-## Fotografías del Pizarrón.

@@ -7,7 +7,7 @@ Cuadrupla de 4 conjuntos:
 3. **S**: Símbolo Inicial
 4. **P**: Conjunto de producciones.
 
-`G(T,N,S,P)`
+$G(T,N,S,P)$
 
 ## Gramática Libre de Contexto
 
