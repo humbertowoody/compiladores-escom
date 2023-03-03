@@ -38,6 +38,7 @@ producción un conjunto de reglas semánticas para calcular los valores de los
 atributos asociados con los símbolos gramáticales que aparecen en esa producción.
 
 - DDS = Gramática Libre de Contexto + Reglas Sintácticas
+- Sirve para traducir.
 
 ## A.A.S. con anotaciones (Árbol Decorado)
 
@@ -51,3 +52,137 @@ escribe $X.a$ para indicar el valor del atributo $a$ de $X$ en el nodo $n$.
 Es aquél atributo cuyo valor en un nodo del A.A.S. se determina a partir de los 
 valores de los atributos de los hijos de ese nodo.
 
+## Recorrido en profundidad
+
+```txt
+void visita(Nodo n) {
+    for (cada nodo m hijo de n de izquierda a derecha) {
+      visita(m);
+    }
+    evalua las reglas semanticas en el nodo n;
+}
+```
+
+En árboles tenemos tres recorridos base:
+
+- Postorden: izq, der, raíz.
+- Inorden: izq, raíz, der.
+- Preorden: raíz, izq, der.
+
+Algunas carácterísticas de los árboles:
+
+- Un **árbol binario** puede tener a lo más dos hijos.
+- Un **árbol multicamino** puede tener más de dos hijos.
+
+## Esquema de Traducción
+
+Es una GLC en la que se encuentran intercalados en los lados derechos de las
+producciones fragmentos de programa llamados **acciones semánticas**.
+
+- Esquema de Traducción = GLC + acciones semánticas.
+- Sirve para traducir.
+
+Queremos obtener la traducción usando un esquema de traducción, para esto los
+pasos son:
+
+1. **Dibujar** el árbol de análisis sintáctico a partir de la expresión. Los
+hijos putativos del árbol son las acciones semánticas.
+2. Colgar del árbol de análisis sintáctico las acciones semánticas.
+3. Recorrer en profundidad el árbol.
+   - Si durante el recorrido encontramos un nodo que es una _acción semántica_,
+   ejecutamos la acción semántica.
+
+## Análisis Sintáctico Descendente
+
+El árbol se construye a partir de la raíz y se va avanzando hacia las hojas.
+
+### Análisis Sintáctico Descendente Recursivo
+
+- Se procesa la entrada usando un conjunto de procedimientos que pueden ser
+recursivos para analizar la entrada.
+
+### Análisis Sintáctico Descendente Predictivo Recursivo
+
+```txt
+tipo -> simple
+     | ^ id
+     | array[simple] of tipo
+simple -> INTEGER
+       | CHAR
+       | NUM PTOPTO NUM
+```
+
+```c
+int preana; // Variable global, almacena el token actual.
+
+// En inglés esta función se llama "match"
+void parea(Complex t)
+{
+  if (preana == t)
+  {
+    // Siguiente componente léxico.
+    preana = sigcomplex(); // Siguiente token.
+  }
+  else
+  {
+    error();
+  }
+}
+
+void tipo()
+{
+  if (preana == INTEGER ||
+      preana == CHAR ||
+      preana == NUM )
+  {
+    simple();
+  }
+  else if (preana == '^')
+  {
+    parea('^');
+    parea(ID);
+  }
+  else if (preana == ARRAY)
+  {
+    parea(ARRAY);
+    parea('[');
+    simple();
+    parea(']');
+    parea(OF);
+    tipo();
+  }
+  else
+  {
+    error();
+  }
+}
+
+void simple()
+{
+  if (preana == INTEGER)
+  {
+    parea(INTEGER);
+  }
+  else if (preana == CHAR)
+  {
+    parea(CHAR);
+  }
+  else if (preana == NUM)
+  {
+    parea(NUM);
+    parea(PTOPTO);
+    parea(NUM);
+  }
+  else
+  {
+    error();
+  }
+}
+```
+
+## Glosario de Términos
+
+- _Acción Semántica_: Fragmento del programa que se encuentra intercalada en
+el lado derecho de una producción.
+- _Hijo Putativo_: es una persona que es bien recibida en casa de alguien más.
+- _Circunflejo_: `^`
