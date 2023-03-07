@@ -7,7 +7,7 @@ Un A.A.S. es un árbol con las siguientes 4 propiedades:
 3. Cada nodo interior está etiquetado con un _no terminal_.
 4. Si $A$ es el _no terminal_ que etiqueta a algún nodo interior y $X_1, X_2, ..., X_n$
    son las etiquetas de lo hijos de ese nodo de izquierda a derecha entonces
-   $A \rightarrow X_1, X_2, ..., X_n$ es una producción. Si $A \rightarrow épsilon$
+   $A \rightarrow X_1, X_2, ..., X_n$ es una producción. Si $A \rightarrow \epsilon$
 
 ## Ambigüedad
 
@@ -100,6 +100,8 @@ El árbol se construye a partir de la raíz y se va avanzando hacia las hojas.
 
 - Se procesa la entrada usando un conjunto de procedimientos que pueden ser
 recursivos para analizar la entrada.
+- El número de funciones: Utilizando los no terminales
+- Por cada no terminal, tiene un procedimiento (función).
 
 ### Análisis Sintáctico Descendente Predictivo Recursivo
 
@@ -179,6 +181,73 @@ void simple()
   }
 }
 ```
+
+- ¿Qué hace el análisis sintáctico? Verifica que los tokens lleguen en el orden 
+correcto.
+- Las producciones de la gramática nos indican en que orden deben venir los tokens.
+
+## Primero($\alpha$)
+
+Es el conjunto de tokens que opere como los primeros símbolos de una o más cadenas 
+generadas a partir de $\alpha$.
+
+- **$\alpha$**: es una cadena de símbolos gramaticales.
+- Las cadenas que pertenecen al lenguaje generado por una gramática ¿de qué está
+hecha? de **tokens**.
+- ¿Cuántos símbolos gramaticales tiene `simple`? Uno, porque `simple` _es_ un 
+símbolo gramatical.
+
+```
+PRIM(simple)={integer,char,num}
+PRIM(^id)={^}
+PRIM(array[simple] of tipo)={array}
+```
+
+## Análisis Sintáctico Predictivo
+
+- Para elegir el lado derecho de la producción debemos basarnos en el token actual.
+- Si intersectamos los conjuntos primeros de los lados derechos de las producciones
+debe dar vacío para que podamos hacer análisis sintáctico predictivo.
+- Nos basamos en los conjuntos primeros de los lados derechos.
+- Si me puedo basar en el token actual (`preana`) entonces podemos hacer análisis
+predictivo.
+- Para escribir los `if` nos basamos en los Primero($\alpha$) de los lados derechos.
+- Como la gramática es recursiva, el número de cadenas que puede generar es $\infin$.
+```c 
+void S()
+{
+  if (preana == '(')
+  {
+    parea('(');
+    S(); 
+    parea(')');
+  }
+  else if (preana == 'a')
+  {
+    parea('a');
+  }
+  else
+  {
+    error();
+  }
+}
+
+void main()
+{
+  preana = sigcomplex();
+  S();
+}
+
+int sigcomplex()
+{
+  return getchar();
+}
+```
+
+## Recursividad por la izquierda 
+
+- Hay recursividad por la izquierda cuando el no terminal del lado izquierdo está 
+también en el extremo izquierdo de la producción.
 
 ## Glosario de Términos
 

@@ -13,7 +13,7 @@ Un compilador consta de dos partes:
 1. **Análisis Léxico**: Separa la cadena de entrada en tokens.
 2. **Análisis Sintáctico**:
    1. Verifica que los _tokens_ vengan en el orden correcto.
-   2. Construye el Árbol Abstracto de Sintaxis (A.A.S.).
+   2. Construye el Árbol Abstracto de Sintaxis (A.A.S.), aunque sea de forma implícita.
    3. Defina si la cadena pertenece al lenguaje generado por la gramática (dicha
       cadena está conformada por _tokens_).
 3. **Análisis Semántico**:
