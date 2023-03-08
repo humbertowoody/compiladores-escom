@@ -248,10 +248,16 @@ int sigcomplex()
 
 - Hay recursividad por la izquierda cuando el no terminal del lado izquierdo está 
 también en el extremo izquierdo de la producción.
+- Cuando dos gramáticas producen el mismo lenguaje se dice que son _equivalentes_.
 
 ## Glosario de Términos
 
-- _Acción Semántica_: Fragmento del programa que se encuentra intercalada en
-el lado derecho de una producción.
-- _Hijo Putativo_: es una persona que es bien recibida en casa de alguien más.
-- _Circunflejo_: `^`
+Acción Semántica
+: Fragmento del programa que se encuentra intercalado en el lado derecho de una 
+producción.
+
+Hijo Putativo
+: es una persona que es bien recibida en casa de alguien más.
+
+Circunflejo
+: `^`

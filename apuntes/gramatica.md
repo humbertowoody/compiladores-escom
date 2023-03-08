@@ -46,8 +46,16 @@ lista -> lista - dígito
 
 ## Glosario de Términos
 
-- Producción: Es algo que tiene lado izquierdo (no terminal) y lado derecho
-  (cadena de símbolos gramaticales), son las reglas de sustitución.
-- Símbolo Gramatical: es un token o un no terminal.
-- Terminal: es lo mismo que _token_.
-- Token = Componente = Terminal.
+Producción
+: Es algo que tiene lado izquierdo (no terminal) y lado derecho 
+(cadena de símbolos gramaticales), son las reglas de sustitución.
+
+Símbolo Gramatical
+: es un token o un no terminal.
+
+Terminal
+: es lo mismo que _token_.
+
+Token  
+: Componente.
+: Terminal.

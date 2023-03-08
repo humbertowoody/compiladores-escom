@@ -35,7 +35,12 @@ compilación.
 
 ## Glosario de Términos.
 
-- **Componente Léxico**: Conjunto de caracteres con significado colectivo.
-- **Token**: Se definen por el lenguaje en cuestión.
-- **Cardinalidad**: Es el número de elementos en un conjunto.
+Componente Léxico
+: Conjunto de caracteres con significado colectivo.
+
+Token
+: Se definen por el lenguaje en cuestión.
+
+Cardinalidad
+: Es el número de elementos en un conjunto.
 
