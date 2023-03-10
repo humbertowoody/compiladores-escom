@@ -1,5 +1,10 @@
 # ¿Qué es un compilador?
 
+- [¿Qué es un compilador?](#qué-es-un-compilador)
+  - [Etapas de un compilador.](#etapas-de-un-compilador)
+  - [Glosario de Términos.](#glosario-de-términos)
+
+
 Es un programa que traduce un programa escrito en lenguaje fuente a un programa en
 lenguaje objeto y que tenga una equivalencia.
 

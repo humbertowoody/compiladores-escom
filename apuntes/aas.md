@@ -1,5 +1,23 @@
 # Árbol de Análisis Sintáctico (AAS)
 
+- [Árbol de Análisis Sintáctico (AAS)](#árbol-de-análisis-sintáctico-aas)
+  - [Ambigüedad](#ambigüedad)
+  - [Asociatividad de Operadores](#asociatividad-de-operadores)
+  - [Notación Postfija](#notación-postfija)
+  - [Definición Definida por la Sintaxis (DDS)](#definición-definida-por-la-sintaxis-dds)
+  - [A.A.S. con anotaciones (Árbol Decorado)](#aas-con-anotaciones-árbol-decorado)
+  - [Atributo Sintetizado](#atributo-sintetizado)
+  - [Recorrido en profundidad](#recorrido-en-profundidad)
+  - [Esquema de Traducción](#esquema-de-traducción)
+  - [Análisis Sintáctico Descendente](#análisis-sintáctico-descendente)
+    - [Análisis Sintáctico Descendente Recursivo](#análisis-sintáctico-descendente-recursivo)
+    - [Análisis Sintáctico Descendente Predictivo Recursivo](#análisis-sintáctico-descendente-predictivo-recursivo)
+  - [Primero($\\alpha$)](#primeroalpha)
+  - [Análisis Sintáctico Predictivo](#análisis-sintáctico-predictivo)
+  - [Recursividad por la izquierda](#recursividad-por-la-izquierda)
+  - [Glosario de Términos](#glosario-de-términos)
+
+
 Un A.A.S. es un árbol con las siguientes 4 propiedades:
 
 1. Raíz etiquetada con el símbolo inicial de la gramática.
@@ -213,6 +231,7 @@ debe dar vacío para que podamos hacer análisis sintáctico predictivo.
 predictivo.
 - Para escribir los `if` nos basamos en los Primero($\alpha$) de los lados derechos.
 - Como la gramática es recursiva, el número de cadenas que puede generar es $\infin$.
+
 ```c 
 void S()
 {
@@ -249,6 +268,7 @@ int sigcomplex()
 - Hay recursividad por la izquierda cuando el no terminal del lado izquierdo está 
 también en el extremo izquierdo de la producción.
 - Cuando dos gramáticas producen el mismo lenguaje se dice que son _equivalentes_.
+- Cuando hay recursividad por la izquierda, no podemos usar el análisis sintáctico descendente recursivo porque _serían un número infinito de llamadas recursivas_.
 
 ## Glosario de Términos
 
