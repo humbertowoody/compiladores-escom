@@ -7,7 +7,7 @@
 - _Yet Another Compiler Compiler_.
 - Durante los años 70 estaba de moda hacer compiladores de compiladores.
 - Nosotros le damos un archivo a YACC con extensión `.y` con lo que nos genera un código en C.
-- Es un generador de analizadores léxicos.
+- Es un generador de analizadores sintácticos.
 - Todo lo que comienza con `YY` pertenece a YACC.
 - Partes del archivo 
   - Declaraciones.
@@ -41,8 +41,8 @@ list: /* nada */
   | list exp'\n'{printf("it%.8g\n", $2);}
   ;
 exp: NUMBER
-  | exp{$$=$1}
-  | exp'+'exp{$$=$1+$3;} /* en este caso: $1=exp, $2='+', $3=exp */
+  | exp{$$=$1} /* $1 = lexema de NUMBER */
+  | exp'+'exp{$$=$1+$3;} /* en este caso: $1=exp (la evaluación de la expresión que está inmediatamente a la izquierda del +), $2='+', $3=exp */
   | exp'-'exp{$$=$1-$3;}
   | exp'*'exp{$$=$1*$3;}
   | exp'/'exp{$$=$1/$3;}
@@ -63,9 +63,10 @@ int yylex()
   {
     /* enunciado nulo */;
   }
+  /* en este punto c tiene un caracter que no es espacio ni tabulador */
   if (c == EOF)
   {
-    /* es para avisrle al analizador sintáctico que ya no hay más tokens */
+    /* es para avisarle al analizador sintáctico que ya no hay más tokens */
     return 0;
   }
   if (c == '.' || isdigit(c))
