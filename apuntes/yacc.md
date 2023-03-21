@@ -150,8 +150,11 @@ int yylex() {
 ## Diferencias entre versiones de HOC
 
 - HOC1 es una calculadora básica
-- HOC2 ahora tiene variables (26)
+- HOC2 
+   - ahora tiene variables (26)
+   - arreglo como memoria [_tabla de símbolos_] (26 posiciones)
 - HOC3 calculadora científica
+   - lista simplemente ligada como tabla de símbolos
 - HOC4 es un puente entre 3 y 5., utiliza una Maquina Virtual de pila
 - HOC5 if, ciclos
 - HOC6 funciones y procesos
@@ -193,3 +196,6 @@ Lexema
 Union vs. Struct en C
 : Las estructuras reservan en memoria el espacio para todos sus miembros y
 en la unión solo se reserva el espacio más grande.
+
+Para HOC3 - Nodo
+: Entradas en la tabla de símbolos

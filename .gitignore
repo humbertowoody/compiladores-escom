@@ -94,4 +94,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode
-n
+
+# Para ignorar la carpeta de la metaria dada por el profesor.
+compila/
+
