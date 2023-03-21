@@ -1,20 +1,9 @@
 # YACC
 
 - [YACC](#yacc)
+    - [HOC2](#hoc2)
+  - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
   - [Glosario de Términos](#glosario-de-términos)
-
-
-- _Yet Another Compiler Compiler_.
-- Durante los años 70 estaba de moda hacer compiladores de compiladores.
-- Nosotros le damos un archivo a YACC con extensión `.y` con lo que nos genera un código en C.
-- Es un generador de analizadores sintácticos.
-- Todo lo que comienza con `YY` pertenece a YACC.
-- Partes del archivo 
-  - Declaraciones.
-  - Reglas: se parece a un **esquema de traducción**.
-  - Soporte.
-- El código en C está entre llaves {}.
-- En YACC no se llaman _acciones semánticas_, se llaman _acciones gramaticales_.
 
 Proceso de ejecución de YACC:
 
@@ -93,11 +82,79 @@ void yyerror(char *s)
 - `$1` hace referencia al primer símbolo gramatical del lado derecho de la producción.
 - `$2` hace referencia al segundo símbolo gramatical del lado derecho de la producción.
 - `$3` hace referencia al tercer símbolo gramatical del lado derecho de la producción.
-- `$n` hace referencia al n-éscimo símbolo gramatical del lado derecho de la producción.
+- `$n` hace referencia al n-ésimo símbolo gramatical del lado derecho de la producción.
 - `NUMBER` es un token, un tipo de token.
 - `#define YYSTYPE`: Le dice el tipo de datos de los elementos de la pila.
 - `$$` es dónde se guarda el valor que se asigna a toda la producción.
+- Cuando se hace referencia a un token, YACC nos devuelve un lexema.
+- Para entender YACC hay que entender los Esquemas de Traducción.
+- Lo que hace la definición dirigida por la sintaxis es traducir de una expresión
+  a su evaluación, al resultado de evaluar esa expresión.
 
+### HOC2
+
+```yacc
+%{
+  double mem[26];
+%}
+%union {
+  double val;
+  int index;
+}
+%token val> NUMBER
+%token index> VAR
+%type val> exp /* es un no terminal */
+%right '='
+...
+%left UNARYMINUS
+%%
+...
+exp: NUMBER     { $$ = $1; }
+  | VAR         { $$ = MEM[$1]; }
+  | VAR '=' exp { $$ = mem[$1] = $3; }
+  ...
+  | '-' exp %prec UNARYMINUS {$$ = -$2;}
+  ;
+%%
+
+int yylex() {
+  if (c == '.' || isdigit(c))
+  {
+    ...
+    scanf("%.ld", yylval.val);
+    return NUMBER;
+  }
+  if (islower(c))
+  {
+    yylval.index = c - 'a';
+    return VAR;
+  }
+  return c;
+}
+```
+
+- Existen dos formas de definir el tipo de dato de la pila de YACC:
+  1. Usando `#define YYSTYPE`
+  2. Usando `%union` con lo que se declara una Unión de C.
+- `exp` es un **no terminal**.
+- `%type` es usado para indicarle qué parte de la unión usar en el no terminal.
+- `yylex()` _trabaja para_ `yyparse()`.
+- `yylex()` es el analizador léxico.
+- `yyparse()` es el analizador sintáctico.
+- `yylval` es una variable global.
+- En este ejemplo `yylval` es de tipo `union` (el mismo de la pila), por lo que
+  debemos especificar qué parte usar para almacenar el lexema.
+- Los lexemas del token `NUMBER` está conformado por dígitos y el punto decimal.
+- Usamos `mem[26]` como _tabla de símbolos_.
+
+## Diferencias entre versiones de HOC
+
+- HOC1 es una calculadora básica
+- HOC2 ahora tiene variables (26)
+- HOC3 calculadora científica
+- HOC4 es un puente entre 3 y 5., utiliza una Maquina Virtual de pila
+- HOC5 if, ciclos
+- HOC6 funciones y procesos
 
 ## Glosario de Términos
 
@@ -111,8 +168,9 @@ Acción Gramatical
 : Acción Semántica
 
 Acción Semántica
-: Fragmento del programa que se encuentra intercalado en el lado derecho de una 
+: Fragmento del programa que se encuentra intercalado en el lado derecho de una
 producción.
+: Acciones gramaticales
 
 Asociatividad
 : Reglas para reducir expresiones y poder evaluarla.
@@ -131,3 +189,7 @@ Componente Léxico
 Lexema
 : Caracteres en particular que forman un token.
 : Por ejemplo en el token `223` el lexema es `2`, `2` y `3`.
+
+Union vs. Struct en C
+: Las estructuras reservan en memoria el espacio para todos sus miembros y
+en la unión solo se reserva el espacio más grande.

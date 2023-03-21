@@ -63,5 +63,5 @@ Terminal
 : es lo mismo que _token_.
 
 Token  
-: Componente.
+: Componente Léxico.
 : Terminal.

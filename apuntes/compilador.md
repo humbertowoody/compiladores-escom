@@ -2,6 +2,7 @@
 
 - [¿Qué es un compilador?](#qué-es-un-compilador)
   - [Etapas de un compilador.](#etapas-de-un-compilador)
+    - [Módulos de un Compilador](#módulos-de-un-compilador)
   - [Glosario de Términos.](#glosario-de-términos)
 
 
@@ -14,6 +15,8 @@ Un compilador consta de dos partes:
 - **Síntesis**: En esta etapa se _ensambla_ (mala palabra) el programa final.
 
 ## Etapas de un compilador.
+
+Cada etapa puede ser un modulo del compilador.
 
 1. **Análisis Léxico**: Separa la cadena de entrada en tokens.
 2. **Análisis Sintáctico**:
@@ -37,6 +40,11 @@ Un compilador consta de dos partes:
 eliminar expresiones redundantes o poco eficientes.
 6. **Generación de Código**: En esta etapa se genera el código final de la 
 compilación.
+
+### Módulos de un Compilador
+
+- Módulo administrador de la tabla de símbolos.
+- Módulo de manejo del error.
 
 ## Glosario de Términos.
 
