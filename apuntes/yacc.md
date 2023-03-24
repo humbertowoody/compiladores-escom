@@ -313,8 +313,10 @@ void init()
     s->u.ptr = builtins[i].func;
   }
 }
-
 ```
+
+- La tabla de símbolos es una lista simplemente ligada.
+- 
 
 ## Glosario de Términos
 
