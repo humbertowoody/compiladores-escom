@@ -3,6 +3,7 @@
 - [YACC](#yacc)
     - [HOC2](#hoc2)
   - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
+  - [HOC3](#hoc3)
   - [Glosario de Términos](#glosario-de-términos)
 
 Proceso de ejecución de YACC:
@@ -158,6 +159,162 @@ int yylex() {
 - HOC4 es un puente entre 3 y 5., utiliza una Maquina Virtual de pila
 - HOC5 if, ciclos
 - HOC6 funciones y procesos
+
+## HOC3
+
+```yacc
+struct symbol {
+  char *name;
+  int type;
+  union {
+    double val;
+    double (*ptr)(double);
+  } u;
+  struct symbol *next;
+};
+typedef struct symbol Symbol;
+static Symbol *symlist = 0;
+
+Symbol *lookup(char *s)
+{
+  Symbol *sp;
+  for (sp = symlist; sp ; sp = sp->next)
+  {
+    if (!strcmp(sp->name, s))
+    {
+      return sp;
+    }
+  }
+  return (Symbol *)NULL;
+}
+
+Symbol *install(char *s, int t, double d)
+{
+  Symbol *sp = (Symbol*)malloc(sizeof(Symbol));
+  sp->name = (char*)malloc(strlen(s) + 1);
+  strcpy(sp->name, s);
+  sp->type = t;
+  sp->u.val = d;
+  sp->next = symlist;
+  symlist = sp;
+  return sp;
+}
+
+%{
+  #include "hoc.h"
+  ...
+}
+%union {
+  double val;
+  Symbol *sym;
+}
+
+%token <val> NUMBER
+%token <sym> VAR BLTIN INDEF
+%type <val> exp asgn
+
+list:
+  ...
+  | list asgn '\n'
+  ...
+asgn: VAR '=' exp {
+    $$ = $1 -> u.val = $3;
+    $1 -> type = VAR;
+  }
+  ;
+exp: NUMBER { $$ = $1; }
+  | VAR {
+      if ($1 -> type == INDEF)
+      {
+        puts("varaible no definida");
+        $$ = $1 -> u.val;
+      }
+    }
+  | asgn
+  | BLTIN'('exp')' {
+      $$ = ($1 -> u.ptr)($3);
+    }
+  | exp'^'exp {
+      $$ = pow($1, $3);
+    }
+  ...
+
+%%
+
+void main()
+{
+  init();
+  yyparse();
+}
+
+int yylex()
+{
+  ...
+  if (isalpha(c))
+  {
+    Symbol *s;
+    char sbuf[512], *p = sbuf;
+    do
+    {
+      *p++ = c;
+    } while (isalnum(c = getchar()));
+    ungetc(c, stdin);
+    *p = '\0';
+    if ((s = lookup(sbuf)) == 0)
+    {
+      s = install(sbuf, INDEF, 0.0);
+    }
+    yylval.sym = s;
+    if (s->type == INDEF)
+    {
+      return VAR;
+    }
+    return s->type;
+  }
+  return c;
+}
+
+#include "hoc.h"
+
+static struct {
+  char *name;
+  double eval;
+} consts[] = {
+  "PI", 3.14159265358979323846,
+  "E", 2.7182818284590452354,
+  "GAMMA", 0.57721566490153286060,
+  ...,
+  0, 0
+};
+
+static struct {
+  char *name;
+  double (*func)(double);
+} builtins[] = {
+  "sin", sin,
+  "cos", cos,
+  "atan", atan,
+  ...,
+  0, 0
+};
+
+void init()
+{
+  int i;
+  Symbol *s;
+  for (i = 0; consts[i].name; i++)
+  {
+    install(consts[i].name, VAR, consts[i].eval);
+  }
+
+  for (i = 0; builtins[i].name; i++)
+  {
+    s = install(builtins[i].name, BLTIN, 0.0);
+    s->u.ptr = builtins[i].func;
+  }
+}
+
+```
 
 ## Glosario de Términos
 
