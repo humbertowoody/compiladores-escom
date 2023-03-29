@@ -1,0 +1,26 @@
+// automovil
+color 0 ;
+rectangulo 100 100 250 75 ;
+rectangulo 175 50 100 50 ;
+color 1 ;
+circulo 70 125 150 ;
+circulo 70 250 150 ;
+
+// casita
+color 0 ;
+rectangulo 50 325 175 150 ;
+color 1 ;
+rectangulo 110 395 60 80 ;
+color 2 ;
+line 50 325 140 280 ;
+line 140 280 225 325 ;
+
+// monito
+color 0 ;
+circulo 60 400 300 ;
+color 1 ;
+line 430 360 430 460 ;
+line 430 380 500 320 ;
+line 430 380 360 320 ;
+line 430 460 380 500 ;
+line 430 460 480 500 ;
