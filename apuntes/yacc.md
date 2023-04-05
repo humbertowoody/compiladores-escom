@@ -1,7 +1,7 @@
 # YACC
 
 - [YACC](#yacc)
-    - [HOC2](#hoc2)
+  - [HOC2](#hoc2)
   - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
   - [HOC3](#hoc3)
   - [Glosario de Términos](#glosario-de-términos)
@@ -151,11 +151,11 @@ int yylex() {
 ## Diferencias entre versiones de HOC
 
 - HOC1 es una calculadora básica
-- HOC2 
-   - ahora tiene variables (26)
-   - arreglo como memoria [_tabla de símbolos_] (26 posiciones)
+- HOC2
+  - ahora tiene variables (26)
+  - arreglo como memoria [_tabla de símbolos_] (26 posiciones)
 - HOC3 calculadora científica
-   - lista simplemente ligada como tabla de símbolos
+  - lista simplemente ligada como tabla de símbolos
 - HOC4 es un puente entre 3 y 5., utiliza una Maquina Virtual de pila
 - HOC5 if, ciclos
 - HOC6 funciones y procesos
@@ -316,7 +316,63 @@ void init()
 ```
 
 - La tabla de símbolos es una lista simplemente ligada.
-- 
+
+## HOC4
+
+```
+typedef void (*Inst)(void);
+
+#define STOP (Inst)0;
+...
+%union {
+  Symbol *sym;
+  Inst *inst;
+}
+%token <sym> NUMBER VAR BLTIN INDEF
+...
+list:
+  | list asgn{ code2(pop1, STOP); return 1; }
+  ...
+asgn: VAR'='exp{ code3(varpush, (Inst)$1, assign); }
+  ;
+exp: NUMBER {code2(constpush, (Inst)$1);}
+  | VAR {code3(varpush,(Inst)$1,eval);}
+  | asgn
+  ...
+  | exp'+'exp{code(add);}
+  | exp'*'exp{code(mul);}
+  ...
+
+int yylex()
+{
+  ...
+  if(c=='.' || isdigit(c))
+  {
+    double d;
+    ungetc(c, stdin);
+    scanf("%lf", &d);
+    yylval.sym = install("",NUMBER,d);
+    return NUMBER;
+  }
+  if (isalpha(c))
+  {
+    Symbol *s;
+    char sbuf[100],
+        *p = sbuf;
+    do
+    {
+      *p++ = c;
+    } while ((c = getchar()) != EOF && isalnum(c));
+
+    *p = '\0';
+
+    if ((s = lookup(sbuf)) == NULL)
+    {
+      s = install(sbuf, INDEF)
+      }
+    }
+}
+```
 
 ## Glosario de Términos
 
