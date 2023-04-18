@@ -1,9 +1,10 @@
 # YACC
 
 - [YACC](#yacc)
-  - [HOC2](#hoc2)
+    - [HOC2](#hoc2)
   - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
   - [HOC3](#hoc3)
+  - [HOC4](#hoc4)
   - [Glosario de Términos](#glosario-de-términos)
 
 Proceso de ejecución de YACC:
@@ -414,3 +415,6 @@ en la unión solo se reserva el espacio más grande.
 
 Para HOC3 - Nodo
 : Entradas en la tabla de símbolos
+
+Expresión Booleana
+: Una expresión que, al ser evaluada, devuelve un verdad o falso.

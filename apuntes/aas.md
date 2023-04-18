@@ -17,7 +17,6 @@
   - [Recursividad por la izquierda](#recursividad-por-la-izquierda)
   - [Glosario de Términos](#glosario-de-términos)
 
-
 Un A.A.S. es un árbol con las siguientes 4 propiedades:
 
 1. Raíz etiquetada con el símbolo inicial de la gramática.
@@ -34,25 +33,24 @@ por la gramática para la cual se pueden dibujar dos AAS diferentes.
 
 ## Asociatividad de Operadores
 
-Los operadores en una GLC retienen sus reglas de asociatividad, con estas reglas 
-es que podemos reducir cada una de las expresiones que se nos plantean para poder 
+Los operadores en una GLC retienen sus reglas de asociatividad, con estas reglas
+es que podemos reducir cada una de las expresiones que se nos plantean para poder
 evaluarla de forma correcta.
 
 ## Notación Postfija
 
-1. Si $E$ es una variable o una constante entonces la notación postfija de $E$ es 
-también $E$.
-2. Si $E$ es una expresión de la forma $E_1$ operador $E_2$ entonces la notación 
-postfija es $E_1'$ $E_2'$ operador dónde $E_1'$ y $E_2'$ son las  instrucciones 
-postfijas de $E_1$ y $E_2$, respectivamente.
-3. Si $E$ es una expresión de la forma $(E_1)$ entonces la notación postfija de 
-$E_1$ es también la notación postfija de $E$.
-
+1. Si $E$ es una variable o una constante entonces la notación postfija de $E$ es
+   también $E$.
+2. Si $E$ es una expresión de la forma $E_1$ operador $E_2$ entonces la notación
+   postfija es $E_1'$ $E_2'$ operador dónde $E_1'$ y $E_2'$ son las instrucciones
+   postfijas de $E_1$ y $E_2$, respectivamente.
+3. Si $E$ es una expresión de la forma $(E_1)$ entonces la notación postfija de
+   $E_1$ es también la notación postfija de $E$.
 
 ## Definición Definida por la Sintaxis (DDS)
 
-Una DDS asocia a cada símbolo gramatical un conjunto de atributos y a cada 
-producción un conjunto de reglas semánticas para calcular los valores de los 
+Una DDS asocia a cada símbolo gramatical un conjunto de atributos y a cada
+producción un conjunto de reglas semánticas para calcular los valores de los
 atributos asociados con los símbolos gramáticales que aparecen en esa producción.
 
 - DDS = Gramática Libre de Contexto + Reglas Sintácticas
@@ -60,14 +58,14 @@ atributos asociados con los símbolos gramáticales que aparecen en esa producci
 
 ## A.A.S. con anotaciones (Árbol Decorado)
 
-Es el A.A.S. dónde en cada nodo se muestran los valores de los atributos. 
+Es el A.A.S. dónde en cada nodo se muestran los valores de los atributos.
 
-Si un nodo $n$ está etiquetado con el símbolo gramatical $X$ entonces se 
+Si un nodo $n$ está etiquetado con el símbolo gramatical $X$ entonces se
 escribe $X.a$ para indicar el valor del atributo $a$ de $X$ en el nodo $n$.
 
-## Atributo Sintetizado 
+## Atributo Sintetizado
 
-Es aquél atributo cuyo valor en un nodo del A.A.S. se determina a partir de los 
+Es aquél atributo cuyo valor en un nodo del A.A.S. se determina a partir de los
 valores de los atributos de los hijos de ese nodo.
 
 ## Recorrido en profundidad
@@ -104,11 +102,11 @@ Queremos obtener la traducción usando un esquema de traducción, para esto los
 pasos son:
 
 1. **Dibujar** el árbol de análisis sintáctico a partir de la expresión. Los
-hijos putativos del árbol son las acciones semánticas.
+   hijos putativos del árbol son las acciones semánticas.
 2. Colgar del árbol de análisis sintáctico las acciones semánticas.
 3. Recorrer en profundidad el árbol.
    - Si durante el recorrido encontramos un nodo que es una _acción semántica_,
-   ejecutamos la acción semántica.
+     ejecutamos la acción semántica.
 
 ## Análisis Sintáctico Descendente
 
@@ -117,7 +115,7 @@ El árbol se construye a partir de la raíz y se va avanzando hacia las hojas.
 ### Análisis Sintáctico Descendente Recursivo
 
 - Se procesa la entrada usando un conjunto de procedimientos que pueden ser
-recursivos para analizar la entrada.
+  recursivos para analizar la entrada.
 - El número de funciones: Utilizando los no terminales
 - Por cada no terminal, tiene un procedimiento (función).
 
@@ -200,20 +198,20 @@ void simple()
 }
 ```
 
-- ¿Qué hace el análisis sintáctico? Verifica que los tokens lleguen en el orden 
-correcto.
+- ¿Qué hace el análisis sintáctico? Verifica que los tokens lleguen en el orden
+  correcto.
 - Las producciones de la gramática nos indican en que orden deben venir los tokens.
 
 ## Primero($\alpha$)
 
-Es el conjunto de tokens que opere como los primeros símbolos de una o más cadenas 
+Es el conjunto de tokens que opere como los primeros símbolos de una o más cadenas
 generadas a partir de $\alpha$.
 
 - **$\alpha$**: es una cadena de símbolos gramaticales.
 - Las cadenas que pertenecen al lenguaje generado por una gramática ¿de qué está
-hecha? de **tokens**.
-- ¿Cuántos símbolos gramaticales tiene `simple`? Uno, porque `simple` _es_ un 
-símbolo gramatical.
+  hecha? de **tokens**.
+- ¿Cuántos símbolos gramaticales tiene `simple`? Uno, porque `simple` _es_ un
+  símbolo gramatical.
 
 ```
 PRIM(simple)={integer,char,num}
@@ -225,20 +223,20 @@ PRIM(array[simple] of tipo)={array}
 
 - Para elegir el lado derecho de la producción debemos basarnos en el token actual.
 - Si intersectamos los conjuntos primeros de los lados derechos de las producciones
-debe dar vacío para que podamos hacer análisis sintáctico predictivo.
+  debe dar vacío para que podamos hacer análisis sintáctico predictivo.
 - Nos basamos en los conjuntos primeros de los lados derechos.
 - Si me puedo basar en el token actual (`preana`) entonces podemos hacer análisis
-predictivo.
+  predictivo.
 - Para escribir los `if` nos basamos en los Primero($\alpha$) de los lados derechos.
 - Como la gramática es recursiva, el número de cadenas que puede generar es $\infin$.
 
-```c 
+```c
 void S()
 {
   if (preana == '(')
   {
     parea('(');
-    S(); 
+    S();
     parea(')');
   }
   else if (preana == 'a')
@@ -263,17 +261,17 @@ int sigcomplex()
 }
 ```
 
-## Recursividad por la izquierda 
+## Recursividad por la izquierda
 
-- Hay recursividad por la izquierda cuando el no terminal del lado izquierdo está 
-también en el extremo izquierdo de la producción.
+- Hay recursividad por la izquierda cuando el no terminal del lado izquierdo está
+  también en el extremo izquierdo de la producción.
 - Cuando dos gramáticas producen el mismo lenguaje se dice que son _equivalentes_.
 - Cuando hay recursividad por la izquierda, no podemos usar el análisis sintáctico descendente recursivo porque _serían un número infinito de llamadas recursivas_.
 
 ## Glosario de Términos
 
 Acción Semántica
-: Fragmento del programa que se encuentra intercalado en el lado derecho de una 
+: Fragmento del programa que se encuentra intercalado en el lado derecho de una
 producción.
 
 Hijo Putativo
