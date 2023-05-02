@@ -5,6 +5,7 @@
   - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
   - [HOC3](#hoc3)
   - [HOC4](#hoc4)
+  - [HOC 6](#hoc-6)
   - [Glosario de Términos](#glosario-de-términos)
 
 Proceso de ejecución de YACC:
@@ -159,7 +160,7 @@ int yylex() {
   - lista simplemente ligada como tabla de símbolos
 - HOC4 es un puente entre 3 y 5., utiliza una Maquina Virtual de pila
 - HOC5 if, ciclos
-- HOC6 funciones y procesos
+- HOC6 funciones y procedimientos
 
 ## HOC3
 
@@ -375,6 +376,20 @@ int yylex()
 }
 ```
 
+## HOC 6
+
+- En Pascal hay funciones y procedimientos.
+- En lenguaje C solo hay funciones.
+- El marco de función en C tiene tres cosas: 
+  - Parámetros
+  - Dirección de retorno
+  - Variables locales
+- Tenemos 3 pilas:
+  - Pila de YACC
+  - Pila de la Máquina Virtual de Pila
+  - Pila de llamadas
+- Los nombres de funciones y variables se almacenan en la tabla de símbolos.
+
 ## Glosario de Términos
 
 YACC
@@ -418,3 +433,19 @@ Para HOC3 - Nodo
 
 Expresión Booleana
 : Una expresión que, al ser evaluada, devuelve un verdad o falso.
+
+Procedimiento
+: Conjunto de instrucciones asociadas a un nombre.
+
+Variable
+: Una localidad de memoria que tiene asociado un nombre.
+: Nombre que se le da a una localidad de memoria.
+
+Mecanismo de llamada a función
+: Mecanismo que se utiliza para pasar parámetros a una función.
+
+Funcionamiento del mecanismo de llamada a función
+: Se pasa el valor de los parámetros a la función.
+
+Dirección de retorno
+: La dirección de memoria despues de la invocación (llamada) de una función.
