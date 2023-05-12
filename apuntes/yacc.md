@@ -5,6 +5,7 @@
   - [Diferencias entre versiones de HOC](#diferencias-entre-versiones-de-hoc)
   - [HOC3](#hoc3)
   - [HOC4](#hoc4)
+  - [HOC 5](#hoc-5)
   - [HOC 6](#hoc-6)
   - [Glosario de Términos](#glosario-de-términos)
 
@@ -376,6 +377,10 @@ int yylex()
 }
 ```
 
+## HOC 5
+
+- Aquí usamos los _statements_ como cuerpos de ciclos y condicionales.
+
 ## HOC 6
 
 - En Pascal hay funciones y procedimientos.
@@ -389,6 +394,14 @@ int yylex()
   - Pila de la Máquina Virtual de Pila
   - Pila de llamadas
 - Los nombres de funciones y variables se almacenan en la tabla de símbolos.
+- Los parámetros de las funciones tienen dos tipos:
+  - _Reales_: los que se ponen al momento de llamar a la función.
+  - _Formales_: los que se ponen al momento de declarar la función.
+- _Procedimiento_: hace algo, imprime en pantalla por ejempl, **statements**.
+- _Función_: devuelve un valor, **expresiones**.
+- En la RAM se guarda el cuerpo de la función.
+  - En la primer celda de la RAM se guarda la primer instrucción de la función definida por el usuario.
+- Para entenderle a YACC debemos entender _esquemas de traducción_.
 
 ## Glosario de Términos
 
@@ -449,3 +462,16 @@ Funcionamiento del mecanismo de llamada a función
 
 Dirección de retorno
 : La dirección de memoria despues de la invocación (llamada) de una función.
+
+Funciones
+Declaración
+Definición
+Llamada
+: Se le llama _parámetros reales_ a los parámetros que se ponen al momento de llamar una función.
+: Son listas de instrucciones.
+
+Parámetros reales
+: Son los parámetros que se ponen al momento de llamar una función.
+
+Parámetros formales
+: Son los parámetros que se ponen al momento de declarar una función.
