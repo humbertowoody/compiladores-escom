@@ -55,3 +55,6 @@ siguientes hasta que no puedan añadirse nada más a ningún conjunto $SIG$.
 
 $
 : es el fin de la cadena.
+
+Para quitar lo recursivo de una función
+: Se utiliza una pila o se usa un ciclo
