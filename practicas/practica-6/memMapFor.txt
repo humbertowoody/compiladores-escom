@@ -1,0 +1,13 @@
+           forcode
+pc->       STOPX - dirección de condición for
+savepc+1   STOPX - dirección de 2o statement (final de ciclo)
+savepc+2   STOPX - dirección de statement (cuerpo)
+savepc+3   STOPX - dirección de localidad de memoria inmediatamente después del ciclo
+savepc+4   stmt - El primer statement del for (inicialización)
+           STOP
+           condfor
+           STOP
+           stmtfor2
+           STOP
+           stmt
+           STOP
